@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+numpy = "*"
+scikit-learn = "*"
+hyperopt = "*"
+joblib = "*"
+colorama = "*"
+skorch = "*"
+torch = "*"
+tabulate = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
