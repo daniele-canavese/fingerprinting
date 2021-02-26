@@ -1,0 +1,299 @@
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[xlabel=\textsc{time [hours]}, ylabel=\textsc{$R_k$}, axis lines=left, grid=major, width=0.9\linewidth, height=12em, ymax=1, ymin=-1]
+			\addplot +[mark=none, OrangeRed, thick, smooth] table {
+				0.0 0.6424006985899848
+				0.16438555555555556 0.0
+				0.32832833333333333 0.0
+				0.4971713888888889 0.002662851084678322
+				0.6574730555555555 0.5769966539062737
+				0.78226 0.49821302710772186
+				0.9270808333333334 0.6938824543274327
+				1.0892377777777777 0.653195733462574
+				1.219848888888889 0.0
+				1.3924505555555555 0.5153938382140202
+				1.546853888888889 0.6533972985358006
+				1.6716494444444445 0.5959976721931142
+				1.7963813888888889 0.0
+				1.9580397222222223 0.3461861842717103
+				2.1136838888888887 0.6080391059013339
+				2.2577269444444443 0.5701077986178007
+				2.40185 0.6393247669119632
+				2.5459074999999998 0.5193867696030633
+				2.6898524999999998 0.7002048465286903
+				2.83405 0.6266763491153108
+				2.9585875 0.7304614241854389
+				3.096858611111111 0.6910792404855702
+				3.2358333333333333 0.7637508046349754
+				3.3740705555555555 0.6522848070215357
+				3.5046816666666665 0.6391901099196642
+				3.642916111111111 0.5851695374619493
+				3.773598888888889 0.5238562959054939
+				3.893013333333333 0.0
+				4.042634722222222 0.6975491939860095
+				4.180987222222222 0.622000022367413
+				4.331205555555556 0.5268426001384658
+				4.4505558333333335 0.747915771020149
+				4.59010138888889 0.6203199062273458
+				4.721395555555556 0.4352159345869697
+				4.871203333333333 0.4672567299467937
+				5.027208611111111 0.7248265752760582
+				5.165654444444445 0.760051232167923
+				5.296549166666667 0.5123718398081342
+				5.415977222222223 0.6347507587515153
+				5.546555555555555 0.29111494226663426
+				5.719841388888889 0.6957064417289627
+				5.844479722222222 0.6336917848293709
+				5.975399444444444 0.6188097546868678
+				6.100168333333333 0.5786263571114891
+				6.265580833333334 0.5004639643200648
+				6.415464722222222 0.529285574172936
+				6.534445833333334 0.6877970950208484
+				6.659003333333334 -0.12522726531234257
+				6.825095277777778 0.7247316035147445
+				6.955981111111111 0.681164253786372
+				7.100758888888889 0.0
+				7.256611111111111 0.505795978441014
+				7.3947899999999995 0.6550998818751443
+			};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Hyper-parameters optimization plot for the tool instance classifier based on neural network.}
+	\label{fig:optimization_application_long_neural_network}
+\end{figure}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{hyper-parameter} & \textsc{value}\\
+		\midrule
+		\verb|lr| & 0.001044660236833224\\
+		\verb|module__layers| & 4\\
+		\verb|module__neurons_per_layer| & 478\\
+		\verb|module__p| & 0.33926635120188525\\
+		\bottomrule
+	\end{tabular}
+	\caption{Optimal hyper-parameters for the tool instance classifier based on neural network.}
+	\label{tab:hyperparameters_application_long_neural_network}
+\end{table}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrr}
+		\toprule
+		\textsc{statistic} & \textsc{training set} & \textsc{dev set} & \textsc{kts} & \textsc{uts}\\
+		\midrule
+		samples & 955872 & 119484 & 119485 & 30144\\
+		accuracy [$\%$] & 83.050 & 82.687 & 82.649 & 0.000\\
+		balanced accuracy [$\%$] & 79.137 & 76.554 & 76.767 & 0.000\\
+		precision [$\%$] & 45.881 & 44.808 & 44.725 & 0.000\\
+		recall [$\%$] & 79.137 & 76.554 & 76.767 & 0.000\\
+		Cohen’s kappa [$\%$] & 70.892 & 70.285 & 70.290 & 0.000\\
+		F-score [$\%$] & 50.890 & 49.582 & 49.411 & 0.000\\
+		Jaccard score [$\%$] & 38.186 & 37.084 & 36.897 & 0.000\\
+		Hamming loss & 0.170 & 0.173 & 0.174 & 1.000\\
+		zero-one loss & 0.170 & 0.173 & 0.174 & 1.000\\
+		$R_k$ & 0.724 & 0.719 & 0.719 & 0.000\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification statistics for the tool instance classifier based on neural network.}
+	\label{tab:classification_application_long_neural_network}
+\end{table}
+\begin{table}[H]
+	\centering
+\resizebox{\linewidth}{!}{%
+	\begin{tabular}{ll|llllllllllllllll}
+	\setlength{\tabcolsep}{2pt}
+		 & & \multicolumn{16}{c}{\textsc{inferred}}\\
+		 & & \rotatebox{90}{\textsc{ch-48.0}} & \rotatebox{90}{\textsc{ch-68.0}} & \rotatebox{90}{\textsc{cu-7.55.1}} & \rotatebox{90}{\textsc{cu-7.61.0}} & \rotatebox{90}{\textsc{ed-42}} & \rotatebox{90}{\textsc{fi-42.0}} & \rotatebox{90}{\textsc{fi-62.0}} & \rotatebox{90}{\textsc{go-2.1}} & \rotatebox{90}{\textsc{ht-3.49.2}} & \rotatebox{90}{\textsc{hu-1.0}} & \rotatebox{90}{\textsc{ru-1.0.0}} & \rotatebox{90}{\textsc{sl-0.1.4}} & \rotatebox{90}{\textsc{sl-0.1.5}} & \rotatebox{90}{\textsc{wg-1.11.4}} & \rotatebox{90}{\textsc{wg-1.19.5}} & \rotatebox{90}{\textsc{wp-2.0.1}}\\
+		\midrule
+		\multirow{16}{*}{\rotatebox{90}{\textsc{target}}} & \textsc{ch-48.0} & 832 & 178 & 26 & 14 & 91 & 57 & 78 & 43 & 16 & 6 & 22 & 0 & 2 & 8 & 41 & 36\\
+		 & \textsc{ch-68.0} & 60 & 716 & 25 & 1 & 40 & 23 & 80 & 45 & 7 & 8 & 1 & 0 & 2 & 3 & 1 & 12\\
+		 & \textsc{cu-7.55.1} & 0 & 2 & 133 & 5 & 0 & 1 & 1 & 6 & 11 & 0 & 0 & 0 & 1 & 6 & 0 & 6\\
+		 & \textsc{cu-7.61.0} & 0 & 0 & 0 & 121 & 3 & 1 & 0 & 1 & 6 & 0 & 2 & 0 & 0 & 3 & 12 & 2\\
+		 & \textsc{ed-42} & 38 & 77 & 2 & 117 & 2395 & 30 & 40 & 19 & 39 & 33 & 10 & 0 & 1 & 14 & 62 & 39\\
+		 & \textsc{fi-42.0} & 25 & 55 & 5 & 16 & 47 & 437 & 155 & 19 & 56 & 5 & 6 & 0 & 4 & 4 & 7 & 28\\
+		 & \textsc{fi-62.0} & 18 & 98 & 36 & 2 & 28 & 68 & 752 & 39 & 35 & 6 & 2 & 0 & 6 & 5 & 11 & 23\\
+		 & \textsc{go-2.1} & 132 & 1922 & 2542 & 50 & 598 & 123 & 1033 & 63582 & 1334 & 2713 & 1230 & 5 & 45 & 993 & 719 & 1673\\
+		 & \textsc{ht-3.49.2} & 5 & 17 & 22 & 1 & 13 & 7 & 24 & 37 & 1150 & 1 & 1 & 0 & 4 & 5 & 3 & 8\\
+		 & \textsc{hu-1.0} & 2 & 573 & 76 & 15 & 60 & 20 & 474 & 264 & 123 & 26812 & 287 & 0 & 2 & 23 & 431 & 279\\
+		 & \textsc{ru-1.0.0} & 2 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 5 & 9 & 312 & 2 & 0 & 7 & 0 & 7\\
+		 & \textsc{sl-0.1.4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 538 & 74 & 0 & 0 & 0\\
+		 & \textsc{sl-0.1.5} & 0 & 0 & 0 & 1 & 0 & 5 & 0 & 0 & 27 & 0 & 1 & 248 & 402 & 0 & 1 & 0\\
+		 & \textsc{wg-1.11.4} & 0 & 2 & 2 & 7 & 2 & 1 & 1 & 13 & 8 & 0 & 5 & 0 & 0 & 228 & 2 & 12\\
+		 & \textsc{wg-1.19.5} & 0 & 0 & 0 & 6 & 4 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 185 & 3\\
+		 & \textsc{wp-2.0.1} & 1 & 8 & 2 & 6 & 5 & 3 & 0 & 3 & 9 & 0 & 5 & 0 & 1 & 8 & 3 & 158\\
+	\end{tabular}
+	}
+	\caption{Confusion matrix for the tool instance classifier based on neural network on the KTS (where \textsc{go} = \textsc{goldeneye}, \textsc{fi} = \textsc{firefox}, \textsc{hu} = \textsc{hulk}, \textsc{wg} = \textsc{wget}, \textsc{ed} = \textsc{edge}, \textsc{ht} = \textsc{httrack}, \textsc{ch} = \textsc{chrome}, \textsc{ru} = \textsc{rudy}, \textsc{sl} = \textsc{slowloris}, \textsc{cu} = \textsc{curl} and \textsc{wp} = \textsc{wpull}.}
+	\label{tab:confusion_application_long_neural_network}
+\end{table}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[xlabel=\textsc{exchanged packets}, ylabel=\textsc{balanced accuracy [$\%$]}, axis lines=left, grid=major, width=0.9\linewidth, height=12em, ymax=100, ymin=0]
+			\addplot +[mark=none, Purple, thick, smooth] table {
+				2.0 19.388489208633093
+				3.0 24.927869503834874
+				4.0 54.527301974595844
+				5.0 53.21632886576043
+				6.0 68.69625533948522
+				7.0 68.42575442351546
+				8.0 72.89481847087215
+				9.0 70.65940611564585
+				10.0 74.31965688045608
+				11.0 69.44816884349297
+				12.0 68.8225610389293
+				13.0 74.24490208322682
+				14.0 67.57030596943603
+				15.0 72.92575135124757
+				16.0 80.61891800686035
+				17.0 84.07229893610622
+				18.0 87.52780868395364
+				19.0 80.67324879954728
+				20.0 81.32962410281255
+				21.0 91.59309889261436
+				22.0 89.90125251023105
+				23.0 81.09421371942203
+				24.0 88.68005235791361
+				25.0 91.4055817405376
+				26.0 86.55881657783281
+				27.0 88.055203651009
+				28.0 89.09556349851754
+				29.0 82.20725251502759
+				30.0 80.72908953791307
+				31.0 86.94967499363247
+				32.0 88.20552035039813
+				33.0 87.93590668590669
+				34.0 84.16668833094546
+				35.0 64.75837434170768
+				36.0 94.97917687408133
+				37.0 87.83451397087761
+				38.0 91.25385083681643
+				39.0 85.16938714171751
+				40.0 87.55483006864222
+				41.0 85.34712214346636
+				42.0 84.66280068728521
+				43.0 87.02711587041266
+				44.0 86.08504398826979
+				45.0 76.63839084891717
+				46.0 89.2606276226966
+				47.0 91.91210349105087
+				48.0 88.36223036223036
+				49.0 87.50688705234158
+				50.0 83.741861716438
+			};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Balanced accuracy vs. exchange packets plot for the tool instance classifier based on neural network on the KTS.}
+	\label{fig:packets_application_long_neural_network}
+\end{figure}
+\begin{table}[H]
+	\centering
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome-48.0.2564.109 & 142\\
+		chrome-68.0.3440.84 & 336\\
+		curl-7.55.1 & 62\\
+		curl-7.61.0 & 3\\
+		edge-42.17134.1.0 & 454\\
+		firefox-42.0 & 660\\
+		firefox-62.0 & 1651\\
+		goldeneye-2.1 & 2386\\
+		httrack-3.49.2 & 351\\
+		hulk-1.0 & 62\\
+		rudy-1.0.0 & 60\\
+		slowloris-0.1.4 & 0\\
+		slowloris-0.1.5 & 75\\
+		wget-1.11.4 & 5\\
+		wget-1.19.5 & 96\\
+		wpull-2.0.1 & 191\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{firefox-68.0}.}
+	\end{subtable}
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome-48.0.2564.109 & 210\\
+		chrome-68.0.3440.84 & 321\\
+		curl-7.55.1 & 47\\
+		curl-7.61.0 & 19\\
+		edge-42.17134.1.0 & 673\\
+		firefox-42.0 & 139\\
+		firefox-62.0 & 439\\
+		goldeneye-2.1 & 480\\
+		httrack-3.49.2 & 312\\
+		hulk-1.0 & 121\\
+		rudy-1.0.0 & 240\\
+		slowloris-0.1.4 & 0\\
+		slowloris-0.1.5 & 9\\
+		wget-1.11.4 & 99\\
+		wget-1.19.5 & 201\\
+		wpull-2.0.1 & 355\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{grabsite-2.1.16}.}
+	\end{subtable}
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome-48.0.2564.109 & 1636\\
+		chrome-68.0.3440.84 & 3446\\
+		curl-7.55.1 & 509\\
+		curl-7.61.0 & 8\\
+		edge-42.17134.1.0 & 75\\
+		firefox-42.0 & 281\\
+		firefox-62.0 & 1091\\
+		goldeneye-2.1 & 1292\\
+		httrack-3.49.2 & 322\\
+		hulk-1.0 & 26\\
+		rudy-1.0.0 & 20\\
+		slowloris-0.1.4 & 0\\
+		slowloris-0.1.5 & 7\\
+		wget-1.11.4 & 45\\
+		wget-1.19.5 & 28\\
+		wpull-2.0.1 & 164\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{opera-62.0.3331.66}.}
+	\end{subtable}
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome-48.0.2564.109 & 920\\
+		chrome-68.0.3440.84 & 239\\
+		curl-7.55.1 & 33\\
+		curl-7.61.0 & 71\\
+		edge-42.17134.1.0 & 1022\\
+		firefox-42.0 & 473\\
+		firefox-62.0 & 1262\\
+		goldeneye-2.1 & 100\\
+		httrack-3.49.2 & 735\\
+		hulk-1.0 & 61\\
+		rudy-1.0.0 & 4359\\
+		slowloris-0.1.4 & 9\\
+		slowloris-0.1.5 & 3\\
+		wget-1.11.4 & 405\\
+		wget-1.19.5 & 129\\
+		wpull-2.0.1 & 1174\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{slowhttptest-1.6}.}
+	\end{subtable}
+	\caption{Classification of unknown tools for the tool instance classifier based on neural network.}
+	\label{tab:unknown_application_long_neural_network}
+\end{table}

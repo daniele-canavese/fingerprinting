@@ -1,0 +1,272 @@
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[xlabel=\textsc{time [hours]}, ylabel=\textsc{$R_k$}, axis lines=left, grid=major, width=0.9\linewidth, height=12em, ymax=1, ymin=-1]
+			\addplot +[mark=none, OrangeRed, thick, smooth] table {
+				0.0 0.6097928747463992
+				0.02323722222222222 0.6129217596667639
+				0.041763611111111106 0.4703741796525676
+				0.05695083333333333 0.5659559449855478
+				0.08933638888888888 0.49083946217708474
+				0.112875 0.3839248315874107
+				0.11424583333333334 0.5912762931341725
+				0.13971027777777778 0.3535225559525793
+				0.14416944444444443 0.65758476919424
+				0.16347333333333333 0.3249911079651362
+				0.16884305555555557 0.35752147360542386
+				0.18322277777777776 0.6363924381979323
+				0.20063166666666668 0.3595746041350477
+				0.21317527777777778 0.6743027977006054
+				0.22363305555555554 0.593351071704001
+				0.2252461111111111 0.46589422970395195
+				0.23667916666666666 0.5338016730360136
+				0.26025722222222225 0.33755169331113033
+				0.27146611111111113 0.64794800805626
+				0.2943708333333333 0.5749196525598205
+				0.32194027777777773 0.7127060139469491
+				0.3325061111111111 0.6883212846743243
+				0.3406336111111111 0.7086868132977187
+				0.34897555555555554 0.6895606230007075
+				0.35529333333333335 0.6840343552694009
+				0.3716733333333333 0.6777050136213861
+				0.37734694444444444 0.667391628950872
+				0.38395305555555553 0.3761604603077367
+				0.3923538888888889 0.6856641297261536
+				0.3949780555555556 0.369087550079868
+				0.3956847222222222 0.6405498787099887
+				0.4372683333333333 0.48872005894110854
+				0.4550363888888889 0.6598688346461978
+				0.4682030555555555 0.6222052288545724
+				0.4761391666666667 0.5864463418609243
+				0.49299499999999996 0.41575258733027903
+				0.507818611111111 0.5090080565730162
+				0.5134641666666667 0.6325657375201829
+				0.51747 0.5818651273777953
+				0.5290283333333333 0.660229263534804
+				0.5460172222222223 0.7036853324553758
+				0.601403888888889 0.5782540089755777
+				0.6077822222222222 0.660559335731482
+				0.6483358333333333 0.4299531753362494
+				0.6557111111111111 0.36127346482174205
+				0.6579066666666666 0.3422101975322571
+				0.6661291666666667 0.6872665412197645
+				0.6844747222222222 0.6571675886232108
+				0.69867 0.6071890224266584
+				0.7226044444444445 0.4301046366212005
+				0.7232886111111111 0.7003922808377742
+			};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Hyper-parameters optimization plot for the tool classifier based on extra-trees.}
+	\label{fig:optimization_application_short_extra_trees}
+\end{figure}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{hyper-parameter} & \textsc{value}\\
+		\midrule
+		\verb|criterion| & entropy\\
+		\verb|max_depth| & 20\\
+		\verb|min_samples_leaf| & 21\\
+		\verb|min_samples_split| & 49\\
+		\verb|n_estimators| & 96\\
+		\bottomrule
+	\end{tabular}
+	\caption{Optimal hyper-parameters for the tool classifier based on extra-trees.}
+	\label{tab:hyperparameters_application_short_extra_trees}
+\end{table}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrr}
+		\toprule
+		\textsc{statistic} & \textsc{training set} & \textsc{dev set} & \textsc{kts} & \textsc{uts}\\
+		\midrule
+		samples & 955872 & 119484 & 119485 & 30144\\
+		accuracy [$\%$] & 83.376 & 83.256 & 83.226 & 4.668\\
+		balanced accuracy [$\%$] & 69.140 & 66.884 & 66.701 & 5.383\\
+		precision [$\%$] & 50.983 & 49.885 & 49.685 & 3.105\\
+		recall [$\%$] & 69.140 & 66.884 & 66.701 & 1.538\\
+		Cohen’s kappa [$\%$] & 70.282 & 70.017 & 70.042 & 2.396\\
+		F-score [$\%$] & 52.837 & 51.522 & 51.257 & 2.057\\
+		Jaccard score [$\%$] & 39.406 & 38.294 & 38.123 & 1.202\\
+		Hamming loss & 0.166 & 0.167 & 0.168 & 0.953\\
+		zero-one loss & 0.166 & 0.167 & 0.168 & 0.953\\
+		$R_k$ & 0.713 & 0.710 & 0.711 & 0.030\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification statistics for the tool classifier based on extra-trees.}
+	\label{tab:classification_application_short_extra_trees}
+\end{table}
+\begin{table}[H]
+	\centering
+\resizebox{\linewidth}{!}{%
+	\begin{tabular}{ll|lllllllllll}
+	\setlength{\tabcolsep}{2pt}
+		 & & \multicolumn{11}{c}{\textsc{inferred}}\\
+		 & & \textsc{chrome} & \textsc{curl} & \textsc{edge} & \textsc{firefox} & \textsc{goldeneye} & \textsc{httrack} & \textsc{hulk} & \textsc{rudy} & \textsc{slowloris} & \textsc{wget} & \textsc{wpull}\\
+		\midrule
+		\multirow{11}{*}{\rotatebox{90}{\textsc{target}}} & \textsc{chrome} & 1256 & 73 & 208 & 112 & 358 & 126 & 43 & 13 & 153 & 64 & 68\\
+		 & \textsc{curl} & 0 & 179 & 22 & 0 & 41 & 38 & 2 & 1 & 26 & 7 & 7\\
+		 & \textsc{edge} & 124 & 35 & 2025 & 30 & 103 & 140 & 51 & 10 & 284 & 11 & 103\\
+		 & \textsc{firefox} & 204 & 52 & 171 & 837 & 286 & 169 & 27 & 17 & 68 & 63 & 104\\
+		 & \textsc{goldeneye} & 92 & 237 & 1084 & 57 & 66908 & 5511 & 1061 & 173 & 2759 & 458 & 354\\
+		 & \textsc{httrack} & 17 & 15 & 15 & 14 & 122 & 978 & 1 & 1 & 94 & 13 & 28\\
+		 & \textsc{hulk} & 26 & 6 & 431 & 38 & 1496 & 1225 & 25393 & 15 & 641 & 20 & 150\\
+		 & \textsc{rudy} & 0 & 2 & 4 & 0 & 32 & 19 & 5 & 249 & 33 & 2 & 2\\
+		 & \textsc{slowloris} & 1 & 0 & 2 & 0 & 0 & 35 & 0 & 0 & 1260 & 0 & 1\\
+		 & \textsc{wget} & 4 & 18 & 19 & 0 & 40 & 51 & 4 & 3 & 68 & 255 & 20\\
+		 & \textsc{wpull} & 1 & 5 & 8 & 1 & 36 & 38 & 0 & 6 & 12 & 3 & 102\\
+	\end{tabular}
+	}
+	\caption{Confusion matrix for the tool classifier based on extra-trees on the KTS.}
+	\label{tab:confusion_application_short_extra_trees}
+\end{table}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[xlabel=\textsc{exchanged packets}, ylabel=\textsc{balanced accuracy [$\%$]}, axis lines=left, grid=major, width=0.9\linewidth, height=12em, ymax=100, ymin=0]
+			\addplot +[mark=none, Purple, thick, smooth] table {
+				2.0 19.80215827338129
+				3.0 27.704762304035384
+				4.0 32.85624490428353
+				5.0 26.97937261027903
+				6.0 59.943742285905486
+				7.0 57.91323697307021
+				8.0 54.47910122958608
+				9.0 55.15588866996144
+				10.0 60.11807057046714
+				11.0 63.63519726548047
+				12.0 46.89928953053374
+				13.0 54.195948582925894
+				14.0 54.37530452970495
+				15.0 52.92425914287415
+				16.0 63.61159239814849
+				17.0 67.00845207664909
+				18.0 77.25086710746453
+				19.0 69.82728953382974
+				20.0 73.96728270871684
+				21.0 84.80611800488667
+				22.0 84.28690010149812
+				23.0 65.15214866434378
+				24.0 74.44803538968412
+				25.0 67.47474803130483
+				26.0 76.65138213650722
+				27.0 62.141781460501065
+				28.0 69.71009134808814
+				29.0 55.74970635038803
+				30.0 65.22850052246604
+				31.0 59.750853975439036
+				32.0 72.12739316869433
+				33.0 57.857026826325075
+				34.0 68.83629334013975
+				35.0 64.56518789852123
+				36.0 67.39366595895258
+				37.0 72.76455026455027
+				38.0 76.56950237190101
+				39.0 63.33694149287865
+				40.0 80.36084254143647
+				41.0 46.58445153107075
+				42.0 67.38067964872089
+				43.0 86.71714988187102
+				44.0 93.32850840915357
+				45.0 66.81720326457167
+				46.0 55.505851765993754
+				47.0 69.37405241498809
+				48.0 76.77132391418107
+				49.0 83.09283309283309
+				50.0 83.13933829823661
+			};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Balanced accuracy vs. exchange packets plot for the tool classifier based on extra-trees on the KTS.}
+	\label{fig:packets_application_short_extra_trees}
+\end{figure}
+\begin{table}[H]
+	\centering
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome & 260\\
+		curl & 350\\
+		edge & 663\\
+		firefox & 1407\\
+		goldeneye & 495\\
+		httrack & 585\\
+		hulk & 2249\\
+		rudy & 8\\
+		slowloris & 41\\
+		wget & 215\\
+		wpull & 261\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{firefox-68.0}.}
+	\end{subtable}
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome & 188\\
+		curl & 142\\
+		edge & 230\\
+		firefox & 187\\
+		goldeneye & 1097\\
+		httrack & 468\\
+		hulk & 32\\
+		rudy & 33\\
+		slowloris & 132\\
+		wget & 293\\
+		wpull & 863\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{grabsite-2.1.16}.}
+	\end{subtable}
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome & 3498\\
+		curl & 412\\
+		edge & 494\\
+		firefox & 523\\
+		goldeneye & 3009\\
+		httrack & 354\\
+		hulk & 39\\
+		rudy & 147\\
+		slowloris & 156\\
+		wget & 66\\
+		wpull & 252\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{opera-62.0.3331.66}.}
+	\end{subtable}
+	\begin{subtable}{.45\linewidth}
+		\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textsc{inferred class} & \textsc{samples}\\
+		\midrule
+		chrome & 373\\
+		edge & 1458\\
+		firefox & 1120\\
+		goldeneye & 2033\\
+		httrack & 1598\\
+		hulk & 61\\
+		rudy & 3516\\
+		slowloris & 463\\
+		wget & 53\\
+		wpull & 320\\
+		\bottomrule
+	\end{tabular}
+	\caption{Classification of \textsc{slowhttptest-1.6}.}
+	\end{subtable}
+	\caption{Classification of unknown tools for the tool classifier based on extra-trees.}
+	\label{tab:unknown_application_short_extra_trees}
+\end{table}

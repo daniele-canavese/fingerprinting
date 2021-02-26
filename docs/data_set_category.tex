@@ -1,0 +1,17 @@
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrrr}
+		\toprule
+		 & \multicolumn{2}{c}{\textsc{sent by client}} & \multicolumn{2}{c}{\textsc{sent by server}}\\
+		\cmidrule(lr){2-3}
+		\cmidrule(lr){4-5}
+		\textsc{category} & \textsc{packets} & \textsc{bytes} & \textsc{packets} & \textsc{bytes} & \textsc{duration} [$ms$]\\
+		\midrule
+		browser & 30.590 & 2381.743 & 41.748 & 46519.913 & 25495.701\\
+		crawler & 95.668 & 1568.130 & 158.849 & 344685.003 & 4589.703\\
+		dos & 10.974 & 738.409 & 16.329 & 17955.801 & 2895.279\\
+		\bottomrule
+	\end{tabular}
+	\caption{Means of some features for the category in our data set.}
+	\label{tab:means_category}
+\end{table}

@@ -4,23 +4,18 @@ Report generator.
 
 from argparse import ArgumentParser
 from glob import glob
-from os.path import splitext
 from warnings import simplefilter
 
 from joblib import load
 from numpy import float32
-from pandas import DataFrame
-from pandas import Series
 from pandas import read_csv
 from pandas import set_option
-from sklearn.ensemble import ExtraTreesClassifier
 from skorch.exceptions import DeviceWarning
 
 from data import features
 from ml import classify
 from ml import print_confusion
 from ml import print_data_set
-from ml import print_ensemble_statistics
 from ml import print_hyperparameters
 from ml import print_optimization
 from ml import print_packets
@@ -62,10 +57,6 @@ for k, v in groups.items():
         print_data_set(f, k, v, data_set, k)
 
 # Generates the classifier reports.
-yy_full = DataFrame()
-yy_category = DataFrame()
-yy_noextra = DataFrame()
-
 m = {
         "dos":                  "dos",
         "browser":              "browser",
@@ -128,23 +119,3 @@ for output, what in outputs.items():
             print_confusion(f, tag, description, known_y, known_yy, classes)
             print_packets(f, tag, description, known_y, known_yy, known_set)
             print_unknown(f, tag, description, unknown_yy, unknown_set)
-
-            yy_full[splitext(i)[0]] = known_yy.map(m)
-            if output == "category":
-                yy_category[splitext(i)[0]] = known_yy.map(m)
-            if not isinstance(model["classifier"], ExtraTreesClassifier):
-                yy_noextra[splitext(i)[0]] = known_yy.map(m)
-
-# Computes the inferred categories using the ensemble classifiers.
-with open("%s/data_full_ensemble.tex" % args.output, "w") as f:
-    yy_full = Series(yy_full.mode(axis=1)[0])
-    y = Series(known_set.loc[:, "category"].astype("category"))
-    print_ensemble_statistics(f, "full", "full ensemble classifier", y, yy_full)
-with open("%s/data_no_extra-trees_ensemble.tex" % args.output, "w") as f:
-    yy_noextra = Series(yy_noextra.mode(axis=1)[0])
-    y = Series(known_set.loc[:, "category"].astype("category"))
-    print_ensemble_statistics(f, "no_extra-trees", "ensemble classifier without extra-trees", y, yy_noextra)
-with open("%s/data_category_ensemble.tex" % args.output, "w") as f:
-    yy_category = Series(yy_category.mode(axis=1)[0])
-    y = Series(known_set.loc[:, "category"].astype("category"))
-    print_ensemble_statistics(f, "category", "category ensemble classifier", y, yy_category)

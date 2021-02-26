@@ -1,0 +1,202 @@
+\documentclass[times,review]{article}
+
+\usepackage{framed,multirow}
+\usepackage{booktabs}
+\usepackage[usenames, dvipsnames, svgnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{url}
+\usepackage{longtable}
+\usepackage[colorlinks]{hyperref}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xspace}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+
+\newcommand{\ie}{i.e\@.\xspace}
+\newcommand{\eg}{e.g\@.\xspace}
+\newcommand{\etal}{et al\@.\xspace}
+
+\title{
+    Encryption agnostic classifiers of traffic originators and\\their application to anomaly detection\\
+    {\Large Traffic statistics dataset and insights on machine learning models}
+}
+\author{
+    Daniele Canavese$^\text{a}$\\\href{mailto:daniele.canavese@polito.it}{daniele.canavese@polito.it}\and
+    Leonardo Regano$^\text{a}$\\\href{leonardo.regano@polito.it}{leonardo.regano@polito.it}\and
+    Cataldo Basile$^\text{a}$\\\href{cataldo.basile@polito.it}{cataldo.basile@polito.it}\and
+    Gabriele Ciravegna$^\text{b}$\\\href{gabriele.ciravegna@unifi.it}{gabriele.ciravegna@unifi.it}\and
+    Antonio Lioy$^\text{a}$\\\href{lioy@polito.it}{lioy@polito.it}
+}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{flushleft}
+    $^\text{a}$ Dipartimento di Automatica e Informatica, Politecnico di Torino, 10129 Torino, Italy\\
+    $^\text{b}$ Dipartimento di Ingegneria dell'Informazione, Università degli Studi di Firenze, 53100 Siena, Italy
+\end{flushleft}
+\newpage
+\section*{Data set}
+
+This section reports several statistics about the data set. Table~\ref{tab:tools} lists the tools that have been used to generate the traffic that has been considered in the presented
+data set.
+Table~\ref{tab:features} reports the features that have been used to train and test the machine-learning
+models.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{llcc}
+         \toprule
+         \textsc{application} & \textsc{category} & \textsc{Windows} & \textsc{Linux}\\
+         \midrule
+         Chrome 48                        & browser               & \faCheckCircle           & \faCheckCircle\\
+         Chrome 68                        & browser               & \faCheckCircle           & \faCheckCircle\\
+         Firefox 42                       & browser               & \faCheckCircle           & \faCheckCircle\\
+         Firefox 62                       & browser               & \faCheckCircle           & \faCheckCircle\\
+         {Firefox 68          }           & {browser}     & {\faCircleO}     & {\faCheckCircle}\\
+         Edge 42                          & browser               & \faCheckCircle           & \faCircleO\\
+         {Opera 62}                      & {browser}     & {\faCheckCircle} & {\faCircleO}\\
+         \cmidrule(lr){1-4}
+         GoldenEye 3.49.2               & stress tool           & \faCheckCircle           & \faCheckCircle\\
+         HULK 1.0                       & stress tool           & \faCheckCircle           & \faCheckCircle\\
+         {RudyJS 1.0.0}         & {stress tool} & {\faCheckCircle} & {\faCheckCircle}\\
+         {SlowHTTPTest 1.6}     & {stress tool} & {\faCircleO}     & {\faCheckCircle}\\
+         SlowLoris 7.70                 & stress tool           & \faCheckCircle           & \faCheckCircle\\
+          \cmidrule(lr){1-4}
+        Curl 7.55                      & web crawler           & \faCheckCircle           & \faCheckCircle\\
+         {GrabSite 2.1.16}      & {web crawler} & {\faCircleO}     & {\faCheckCircle}\\
+         Httrack 3.49.2                 & web crawler           & \faCheckCircle           & \faCheckCircle\\
+         Wget 1.19                      & web crawler           & \faCheckCircle           & \faCheckCircle\\
+         {Wpull 2.0.1}          & {web crawler} & {\faCheckCircle} & {\faCheckCircle}\\
+        \bottomrule
+    \end{tabular}
+    \caption{Tools used to generate the traffic considered in the experiments.}
+    \label{tab:tools}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        & \textsc{feature} & \textsc{unit}\\
+        \midrule
+        1 &\# packets (both directions) & $packets$\\
+        2 &\# packets with payload (both directions) & $packets$\\
+        3 &\# retransmitted packets (both directions) & $packets$\\
+        4 &\# out of sequence packets (both directions) & $packets$\\
+        5 &\# packets with ACK set (both directions) & $packets$\\
+        6 &\# packets with ACK set and no payload (both directions) & $packets$\\
+        7 &\# packets with FIN set (both directions) & $packets$\\
+        8 &\# packets with RST set (both directions)\footnotemark & $packets$\\
+        9 &\# packets with SYN set (both directions) & $packets$\\
+
+        10 &\# payload bytes excluding retransmissions (both directions) & $bytes$\\
+        11 &\# payload bytes including retransmissions (both directions) & $bytes$\\
+        12 & \# retransmitted bytes (both directions) & $bytes$\\
+
+        13& flow duration & $ms$\\
+        14 &relative time of first payload packet (both directions) & $ms$\\
+        15 &relative time of last payload packet (both directions) & $ms$\\
+        16 &relative time of first ACK packet (both directions) & $ms$\\
+
+        17 &TCP connection correctly terminated & $boolean$\\
+        \bottomrule
+    \end{tabular}
+    \caption{TCP statistics used as classification features.}
+    \label{tab:features}
+\end{table}
+
+\footnotetext{Actually this can be only 0 or 1 since a proper TCP implementation will reset a connection after receiving a RST packet.}
+
+Finally, several statistics, grouped by labels, are reported: the average number of packets and bytes send by the client or by the server and the average connection duration in milliseconds.
+Table~\ref{tab:means_category}, \ref{tab:means_application_short} and \ref{tab:means_application_long} respectively
+reports the averages for the three categories (browsers, crawlers and DoS tools), all the tools and their instances in data set.
+\input{data_set_category}
+\input{data_set_application_short}
+\input{data_set_application_long}
+
+\section*{Classifiers}
+
+This section reports several statistics and plots about the models for classifying the traffic into various classes.
+%
+Three different models have been considered for each classification task: a random forest (via the
+\texttt{RandomForestClassifier} class in \texttt{scikit-learn}), an extra-trees (via the \texttt{ExtraTreesClassifier}
+class in \texttt{scikit-learn}) and a neural network (a custom class implemented in \texttt{PyTorch} and
+\texttt{skorch}).
+The optimization process was performed using the \texttt{hyperopt} package using a Bayesian
+optimization procedure.
+
+For each classifier, the following data are reported:
+\begin{itemize}
+    \item the plots showing the values of the $R_k$ statistics as our Bayesian hyper-parameters optimization process
+    progressed (Figs.~\ref{fig:optimization_category_random_forest}, \ref{fig:optimization_category_extra_trees},
+    \ref{fig:optimization_category_neural_network}, \ref{fig:optimization_application_short_random_forest},
+    \ref{fig:optimization_application_short_extra_trees}, \ref{fig:optimization_application_short_neural_network},
+    \ref{fig:optimization_application_long_random_forest}, \ref{fig:optimization_application_long_extra_trees} and
+    \ref{fig:optimization_application_long_neural_network});
+    \item the tables listing the optimal hyper-parameters found by our Bayesian optimization process
+    (Tables~\ref{tab:hyperparameters_category_random_forest}, \ref{tab:hyperparameters_category_extra_trees},
+    \ref{tab:hyperparameters_category_neural_network}, \ref{tab:hyperparameters_application_short_random_forest},
+    \ref{tab:hyperparameters_application_short_extra_trees}, \ref{tab:hyperparameters_application_short_neural_network},
+    \ref{tab:hyperparameters_application_long_random_forest}, \ref{tab:hyperparameters_application_long_extra_trees}
+    and \ref{tab:hyperparameters_application_long_neural_network}) -- we normally used the default values for the
+    hyper-parameters not reported\footnote{The most notable exceptions are given by the neural networks' batch size and
+    number of epochs, that we chose to set to 1024 and 50, respectively.};
+    \item the tables reporting several classification statistics computed on the training set, development set, known
+    tools test Set and unknown tools test set (Tables~\ref{tab:classification_category_random_forest},
+    \ref{tab:classification_category_extra_trees}, \ref{tab:classification_category_neural_network},
+    \ref{tab:classification_application_short_random_forest}, \ref{tab:classification_application_short_extra_trees},
+    \ref{tab:classification_application_short_neural_network}, \ref{tab:classification_application_long_random_forest},
+    \ref{tab:classification_application_long_extra_trees} and \ref{tab:classification_application_long_neural_network});
+    \item the confusion matrices for each classifier (Tables.~\ref{tab:confusion_category_random_forest},
+    \ref{tab:confusion_category_extra_trees}, \ref{tab:confusion_category_neural_network},
+    \ref{tab:confusion_application_short_random_forest}, \ref{tab:confusion_application_short_extra_trees},
+    \ref{tab:confusion_application_short_neural_network}, \ref{tab:confusion_application_long_random_forest},
+    \ref{tab:confusion_application_long_extra_trees} and \ref{tab:confusion_application_long_neural_network});
+    \item the plots depicting how the balanced accuracy changes as the number of exchanged packets increases
+    (Figs.~\ref{fig:packets_category_random_forest}, \ref{fig:packets_category_extra_trees},
+    \ref{fig:packets_category_neural_network}, \ref{fig:packets_application_short_random_forest},
+    \ref{fig:packets_application_short_extra_trees}, \ref{fig:packets_application_short_neural_network},
+    \ref{fig:packets_application_long_random_forest}, \ref{fig:packets_application_long_extra_trees} and
+    \ref{fig:packets_application_long_neural_network});
+    \item the results of the classification of the unknown tools (Tables~\ref{tab:unknown_category_random_forest},
+    \ref{tab:unknown_category_extra_trees}, \ref{tab:unknown_category_neural_network},
+    \ref{tab:unknown_application_short_random_forest}, \ref{tab:unknown_application_short_extra_trees},
+    \ref{tab:unknown_application_short_neural_network}, \ref{tab:unknown_application_long_random_forest},
+    \ref{tab:unknown_application_long_extra_trees} and \ref{tab:unknown_application_long_neural_network}).
+\end{itemize}
+
+\subsection*{Category classifiers}
+
+This section reports several statistics and plots about the models for classifying the traffic into categories
+(e.g. \textsc{browser}, \textsc{crawler} and \textsc{dos} a.k.a. network stress tools).
+\input{data_category_random_forest}
+\input{data_category_extra_trees}
+\input{data_category_neural_network}
+
+\subsection*{Tool classifiers}
+
+This section reports several statistics and plots about the models for classifying the traffic into tools
+(e.g. \textsc{goldeneye}, \textsc{hulk}, \textsc{firefox}, \textsc{wget}, \textsc{edge}, \textsc{httrack},
+\textsc{chrome}, \textsc{rudy}, \textsc{slowloris}, \textsc{curl} and \textsc{wpull}).
+\input{data_application_short_random_forest}
+\input{data_application_short_extra_trees}
+\input{data_application_short_neural_network}
+
+\subsection*{Tool instance classifiers}
+
+This section reports several statistics and plots about the models for classifying the traffic into tool instances
+(e.g. \textsc{goldeneye-2.1}, \textsc{firefox-62.0}, \textsc{hulk-1.0}, \textsc{wget-1.11.4},
+\textsc{edge-42.17134.1.0}, \textsc{httrack-3.49.2}, \textsc{chrome-48.0.2564.109}, \textsc{rudy-1.0.0},
+\textsc{chrome-68.0.3440.84}, \textsc{firefox-42.0}, \textsc{slowloris-0.1.5}, \textsc{curl-7.55.1},
+\textsc{curl-7.61.0}, \textsc{slowloris-0.1.4}, \textsc{wpull-2.0.1} and \textsc{wget-1.19.5}).
+\input{data_application_long_random_forest}
+\input{data_application_long_extra_trees}
+\input{data_application_long_neural_network}
+\end{document}

@@ -1,0 +1,28 @@
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrrr}
+		\toprule
+		 & \multicolumn{2}{c}{\textsc{sent by client}} & \multicolumn{2}{c}{\textsc{sent by server}}\\
+		\cmidrule(lr){2-3}
+		\cmidrule(lr){4-5}
+		\textsc{tool} & \textsc{packets} & \textsc{bytes} & \textsc{packets} & \textsc{bytes} & \textsc{duration} [$ms$]\\
+		\midrule
+		chrome & 30.605 & 2587.957 & 43.548 & 46727.950 & 36023.258\\
+		curl & 48.260 & 539.707 & 71.030 & 91280.696 & 608.296\\
+		edge & 23.135 & 2024.088 & 21.693 & 21782.879 & 12693.361\\
+		firefox & 40.620 & 2744.452 & 60.108 & 71260.752 & 24748.461\\
+		goldeneye & 13.061 & 800.137 & 21.071 & 24220.021 & 1409.918\\
+		grabsite & 368.901 & 3929.413 & 583.037 & 1803017.128 & 15427.538\\
+		httrack & 16.424 & 1009.946 & 21.192 & 23018.443 & 2517.901\\
+		hulk & 5.711 & 573.383 & 4.576 & 2659.303 & 5909.654\\
+		opera & 25.263 & 1914.553 & 47.881 & 53419.715 & 40428.032\\
+		rudy & 11.332 & 713.800 & 10.997 & 3342.403 & 15770.126\\
+		slowhttptest & 8.640 & 1406.865 & 6.826 & 3494.015 & 11974.112\\
+		slowloris & 5.280 & 164.620 & 3.890 & 47.859 & 13641.368\\
+		wget & 129.312 & 2134.542 & 246.652 & 328985.405 & 2756.862\\
+		wpull & 115.476 & 1239.060 & 214.299 & 296092.743 & 8558.179\\
+		\bottomrule
+	\end{tabular}
+	\caption{Means of some features for the tool in our data set.}
+	\label{tab:means_application_short}
+\end{table}

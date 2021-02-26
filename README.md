@@ -1,10 +1,13 @@
 # Encryption agnostic classifiers of traffic originators andtheir application to anomaly detection
 
 This is the repository for the paper _Encryption agnostic classifiers of traffic originators and their application to
-anomaly detection_ submitted to the _Computers & Electrical Engineering_ journal. It contains the source code that can
-be used to both create a suitable data set and train a set of traffic classificators. In addition, we are also sharing
-the preprocessed data set that we used to write the paper and all our trained models. We did not include the pcap files
-for privacy reasons.
+anomaly detection_ submitted to the _Computers & Electrical Engineering_ journal.
+
+This repository contains the source code that can be used to both create a suitable data set and train a set of traffic
+classificators. In addition, we are also sharing the preprocessed data set that we used to write the paper and all our
+trained models. We did not include the pcap files for privacy reasons.
+
+The file `docs/report.pdf` is a report that summarizes our data set and the performance of our trained models.
 
 ## Content
 
@@ -12,6 +15,7 @@ This project contains the following folders:
 
 + `classification` contains all the Python scripts used to traing and test the machine learning models;
 + `datasets` contains the data sets that we used to perform our experiments;
++ `docs` contains the report of our experiments (the LaTeX source files and its pdf);
 + `models` contains all the nine trained models described in our paper
 + `traffic` contains all the Python scripts used to capture the traffic and generate our data set.
 
@@ -89,4 +93,4 @@ can last for several ours until completion.
 
 Once the training has been completed, you can use the `classification/report.py` to test the classifiers and to
 generate a set of LaTeX files with a commprehensive report. This is the same script that we used to generate the data
-in brief accompanying our paper.
+in brief accompanying our paper and the same pdf that is available in the `docs` folder.
