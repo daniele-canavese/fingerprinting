@@ -1,4 +1,4 @@
-# Encryption agnostic classifiers of traffic originators andtheir application to anomaly detection
+# Encryption agnostic classifiers of traffic originators and their application to anomaly detection
 
 This is the repository for the paper _Encryption agnostic classifiers of traffic originators and their application to
 anomaly detection_ submitted to the _Computers & Electrical Engineering_ journal.
