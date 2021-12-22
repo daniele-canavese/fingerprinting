@@ -1,5 +1,7 @@
 # Encryption agnostic classifiers of traffic originators and their application to anomaly detection
 
+[![DOI](https://zenodo.org/badge/331037883.svg)](https://zenodo.org/badge/latestdoi/331037883)
+
 This is the repository for the paper _Encryption agnostic classifiers of traffic originators and their application to
 anomaly detection_ submitted to the _Computers & Electrical Engineering_ journal.
 
